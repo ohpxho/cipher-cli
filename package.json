@@ -1,0 +1,31 @@
+{
+  "name": "cipher-cli",
+  "version": "1.0.0",
+  "description": "A cli application for encrypting and decrypting text",
+  "main": "./bin/cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohpxho/cipher-cli.git"
+  },
+  "keywords": [
+    "node",
+    "yargs",
+    "cryptography"
+  ],
+  "bin": {
+    "cip": "./bin/cli.js"
+  },
+  "author": "ohpxho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ohpxho/cipher-cli/issues"
+  },
+  "homepage": "https://github.com/ohpxho/cipher-cli#readme",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "yargs": "^17.5.1"
+  }
+}
