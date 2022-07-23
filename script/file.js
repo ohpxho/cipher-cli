@@ -49,6 +49,9 @@ function encryptTxtFileContent(type, text) {
 		case 'caesar':
 			text = cipher.caesar.encrypt(text);
 			break;
+		case 'affine':
+			text = cipher.affine.encrypt(text);
+			break;
 	}
 
 	return text;
@@ -58,6 +61,9 @@ function decryptTxtFileContent(type, text) {
 	switch(type) {
 		case 'caesar':
 			text = cipher.caesar.decrypt(text);
+			break;
+		case 'affine':
+			text = cipher.affine.decrypt(text);
 			break;
 	}
 

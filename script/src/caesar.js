@@ -1,39 +1,28 @@
-const upper = {
-	asciiMin: 65,
-	asciiMax: 90
-};
-
-const lower = {
-	asciiMin: 97,
-	asciiMax: 122
-};
-
+const letter = require('./helper/letter.helper');
 const maxShift = 3;
 
 function encrypt(text) {
-	let charArr = convertTextToCharArray(text);
-	for(let i = 0; i < charArr.length; i++) {
-		if(isLetter(charArr[i])) {
-			charArr[i] = shiftAsciiCode('enc', charArr[i]);
-		}
-	}
-	
-	return charArr.join('');
+	return crypt('enc', text);
 }
 
 function decrypt(text) {
-	let charArr = convertTextToCharArray(text);
+	return crypt('dec', text);
+}
+
+function crypt(action, text) {
+	let charArr = Array.from(text);
 	for(let i = 0; i < charArr.length; i++) {
-		if(isLetter(charArr[i])) {
-			charArr[i] = shiftAsciiCode('dec', charArr[i]);
+		if(letter.isLetter(charArr[i])) {
+			charArr[i] = shiftAsciiCode(action, charArr[i]);
 		}
 	}
 	
 	return charArr.join('');
 }
 
-function shiftAsciiCode(action, letter) {
-	const letterAscciCode = letter.charCodeAt(0);
+
+function shiftAsciiCode(action, _letter) {
+	const letterAscciCode = _letter.charCodeAt(0);
 	let shiftedVal = 0;
 	if(action === 'enc') shiftedVal = letterAscciCode + maxShift;
 	else shiftedVal = letterAscciCode - maxShift;
@@ -41,47 +30,34 @@ function shiftAsciiCode(action, letter) {
 	let remainder = 0;
 
 	if(action === 'enc' && isMaxLimitExceeded(shiftedVal)) {
-		if(isUpper(letterAscciCode)) {
-			remainder = shiftedVal - upper.asciiMax;
-			shiftedVal = (upper.asciiMin - 1) + remainder;
+		if(letter.isUpper(letterAscciCode)) {
+			remainder = shiftedVal - letter.uppercase.asciiMax;
+			shiftedVal = (letter.uppercase.asciiMin - 1) + remainder;
 		}else {
-			remainder = shiftedVal - lower.asciiMax;
-			shiftedVal = (lower.asciiMin - 1) + remainder;
+			remainder = shiftedVal - letter.lowercase.asciiMax;
+			shiftedVal = (letter.lowercase.asciiMin - 1) + remainder;
 		}
 	}
 
 	if(action === 'dec' && isMinLimitExceeded(shiftedVal)) {
-		if(isUpper(letterAscciCode)) {
-			remainder = upper.asciiMin - shiftedVal;
-			shiftedVal = (upper.asciiMax + 1) - remainder;
+		if(letter.isUpper(letterAscciCode)) {
+			remainder = letter.uppercase.asciiMin - shiftedVal;
+			shiftedVal = (letter.uppercase.asciiMax + 1) - remainder;
 		}else {
-			remainder = lower.asciiMin - shiftedVal;
-			shiftedVal = (lower.asciiMax + 1) - remainder;
+			remainder = letter.lowercase.asciiMin - shiftedVal;
+			shiftedVal = (letter.lowercase.asciiMax + 1) - remainder;
 		}	
 	}
 
 	return String.fromCharCode(shiftedVal);
-}
-
-function isUpper(letter) {
-	return (letter >= upper.asciiMin && letter <= upper.asciiMax);
 } 
 
 function isMaxLimitExceeded(code) {
-	return (code > upper.asciiMax && code < lower.asciiMin) || (code > lower.asciiMax);  
+	return (code > letter.uppercase.asciiMax && code < letter.lowercase.asciiMin) || (code > letter.lowercase.asciiMax);  
 }
 
 function isMinLimitExceeded(code) {
-	return (code < lower.asciiMin && code > upper.asciiMax) || (code < upper.asciiMin);
-}
-
-function isLetter(letter) {
-	const letterAscciCode = letter.charCodeAt(0);
-	return (letterAscciCode >= upper.asciiMin && letterAscciCode <= upper.asciiMax) || (letterAscciCode >= lower.asciiMin && letterAscciCode <= lower.asciiMax) 
-}
-
-function convertTextToCharArray(text) {
-	return Array.from(text);
+	return (code < letter.lowercase.asciiMin && code > letter.uppercase.asciiMax) || (code < letter.uppercase.asciiMin);
 }
 
 module.exports = {
