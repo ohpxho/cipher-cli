@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ohpxho/cipher-cli.git"
+    "url": "git+https://github.com/ohpxho/crypto-cli.git"
   },
   "keywords": [
     "node",
@@ -21,9 +21,9 @@
   "author": "ohpxho",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ohpxho/cipher-cli/issues"
+    "url": "https://github.com/ohpxho/crypto-cli/issues"
   },
-  "homepage": "https://github.com/ohpxho/cipher-cli#readme",
+  "homepage": "https://github.com/ohpxho/crypto-cli#readme",
   "dependencies": {
     "chalk": "^4.0.0",
     "yargs": "^17.5.1"
