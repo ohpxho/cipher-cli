@@ -52,6 +52,9 @@ function encryptTxtFileContent(type, text) {
 		case 'affine':
 			text = cipher.affine.encrypt(text);
 			break;
+		case 'rot13':
+			text = cipher.rot13.encrypt(text);
+			break;
 	}
 
 	return text;
@@ -64,6 +67,9 @@ function decryptTxtFileContent(type, text) {
 			break;
 		case 'affine':
 			text = cipher.affine.decrypt(text);
+			break;
+		case 'rot13':
+			text = cipher.rot13.decrypt(text);
 			break;
 	}
 

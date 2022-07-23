@@ -23,6 +23,12 @@ const options = yargs
     (yargs) => config.positionals(yargs), 
     (argv) => config.exec(argv, cipherT.affine, 'affine')
   )
+  .command(
+    'rot13 <type> [text, file]', 
+    'rot13 encryption algo' , 
+    (yargs) => config.positionals(yargs), 
+    (argv) => config.exec(argv, cipherT.rot13, 'rot13')
+  )
   .help()
   .argv
 
